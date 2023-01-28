@@ -1,0 +1,57 @@
+﻿@using Template.Web.Utilities;
+@using Microsoft.AspNetCore.Html;
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment hostingEnvironment;
+
+@{ var distFileLookup = new DistFileLookup(hostingEnvironment.WebRootPath);
+
+    Func<string, string, string, string> GetFileName = (string folder, string file, string ext) =>
+    {
+        return DebugUtil.IsDebugMode
+            ? $"https://localhost:7168/{file}{ext}"
+            : "/" + folder + "/" + distFileLookup.ResolveFileName(folder, file, ext);
+    };
+
+    IHtmlContent userDataStr = new HtmlString("false");
+    //if (User.Identity?.IsAuthenticated == true)
+    //{
+    //    var data = userService.GetUserInfo(User);
+    //    userDataStr = Json.Serialize(data);
+    //}
+
+    var urlBase = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <title>Template</title>
+
+    @RenderSection("meta", false)
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    @if (!DebugUtil.IsDebugMode)
+    {
+        <link rel="stylesheet" href="@GetFileName("dist", "app", ".css")" />
+    }
+
+    <script crossorigin="anonymous" src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin="anonymous" src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+</head>
+<body>
+    @Html.AntiForgeryToken()
+    
+    <div id="app"></div>
+    <script>
+        var initData = {
+            user: @userDataStr
+        };
+    </script>
+    @RenderBody()
+
+    <script type="text/javascript" src="@GetFileName("dist", "app", ".js")"></script>
+</body>
+</html>
