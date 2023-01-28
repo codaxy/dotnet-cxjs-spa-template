@@ -12,7 +12,7 @@ module.exports = merge(common({ rootCssLoader: MiniCssExtractPlugin.loader }), {
    mode: 'production',
 
    output: {
-      path: p('../wwwroot/dist'),
+      path: p('../Template.WebApi/wwwroot/dist'),
       publicPath: '/dist/',
       filename: '[name].ltc.[contenthash].js',
       chunkFilename: '[name].ltc.[contenthash].js',

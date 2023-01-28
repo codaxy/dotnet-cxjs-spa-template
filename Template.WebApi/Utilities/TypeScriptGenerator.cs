@@ -35,7 +35,7 @@ public class TypeScriptGenerator
                 var generator = new Generator(
                     new GeneratorOptions
                     {
-                        BaseOutputDirectory = "./Spa/app/api/models/" + module.Key,
+                        BaseOutputDirectory = "../Template.WebClient/app/api/models/" + module.Key,
                         CreateIndexFile = false,
                         EnumStringInitializers = true,
                         FileNameConverters = new TypeNameConverterCollection()
