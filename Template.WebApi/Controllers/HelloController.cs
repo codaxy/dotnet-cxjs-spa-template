@@ -11,6 +11,7 @@ public class HelloController : ControllerBase
     [HttpGet]
     public Hello Get()
     {
+        Thread.Sleep(100); //show loading indicator
         return new Hello { Text = "Hello!" };
     }
 }

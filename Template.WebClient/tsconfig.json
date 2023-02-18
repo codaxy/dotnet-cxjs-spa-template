@@ -1,6 +1,7 @@
 {
    "compilerOptions": {
       "jsx": "react-jsx",
-      "lib": ["esnext", "dom"]
+      "lib": ["esnext", "dom"],
+      "experimentalDecorators": true
    }
 }

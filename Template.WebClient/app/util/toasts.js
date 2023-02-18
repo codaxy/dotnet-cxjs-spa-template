@@ -5,7 +5,10 @@ export function showErrorToast(err, title) {
    return Toast.create({
       items: (
          <cx>
-            <div>{err}</div>
+            <div>
+               <div>{title}</div>
+               <div class="text-sm">{err}</div>
+            </div>
          </cx>
       ),
       timeout: 5000,

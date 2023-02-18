@@ -49,12 +49,15 @@ module.exports = ({ rootCssLoader, tailwindOptions }) => {
                            //loose: true,
                            parser: {
                               syntax: 'typescript',
+                              decorators: true,
                               tsx: true,
                            },
                            transform: {
                               react: {
                                  pragma: 'VDOM.createElement',
                               },
+                              legacyDecorator: true,
+                              decoratorMetadata: true,
                            },
                         },
                      },
